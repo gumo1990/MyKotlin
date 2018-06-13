@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun array() {
+
+        
         //数组定义,两种方式
         var int_array: IntArray = intArrayOf(1, 2, 3)
         var double_array: DoubleArray = doubleArrayOf(1.0, 2.1, 3.1)
