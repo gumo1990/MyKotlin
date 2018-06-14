@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * kotlin是兼容java语句的
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         //     zifuchuan()
         //     Conllection()
         //  List()
-        map()
+        //  map()
+        condition()
 
     }
 
@@ -98,14 +102,14 @@ class MainActivity : AppCompatActivity() {
          *  队列List --只读，有序，不唯一     MutableList--加了前缀后可以增删改查
          *  方式一：for--in遍历
          */
-        val goodlMutList: List<String> = listOf("xiaomi8", "iphoneXX", "oppor11", "华为Not", "魅族", "vivoooo33")
-        val goodlMutListss: List<Int> = mutableListOf(7, 4, 8, 2, 3, 1, 0)
-        /*  var des = ""
+        val goodlMutList: MutableList<String> = mutableListOf("xiaomi8", "iphoneXX", "oppor11", "华为Not", "魅族", "vivoooo33")
+        val goodlMutListss: MutableList<Int> = mutableListOf(7, 4, 8, 2, 3, 1, 0)
+          var des = ""
           for( hh in goodlMutList.indices){//indices是队列的下标数组，取值为 0~goodMuList.size-1,hh代表数据数组内的元素
               val item = goodlMutList[hh]
               des = "${des}手机名称：${item}\n"
           }
-          Log.d("whq", "队列List遍历查询\n$des")*/
+          Log.d("whq", "队列List遍历查询\n$des")
         /**
          * 排序，
          * MutableList提供了sort系列方法用于给队列中的元素重新排序
@@ -116,15 +120,15 @@ class MainActivity : AppCompatActivity() {
         tv_main4.setOnClickListener {
             if (sorat) {
                 //sortBy升序排列
-                goodlMutList.sortedBy { it.length }//it.lenght默认条件
+                goodlMutList.sortBy { it.length }//it.lenght默认条件
                 goodlMutListss.sortedBy { it % 3 }//it.lenght默认条件
                 //sortByDescending降序排列
             } else {
-                goodlMutList.sortedByDescending { it.length }
+                goodlMutList.sortByDescending { it.length }
                 goodlMutListss.sortedByDescending { it % 3 }
             }
             var desc = ""
-            for (items in goodlMutListss) {
+            for (items in goodlMutList) {
                 desc = "${desc} 名称哈哈哈：${items}\n"
             }
             Log.d("whq", "手机排序按照${if (sorat) "升序" else "降序"}重新排列：\n$desc")
@@ -144,37 +148,72 @@ class MainActivity : AppCompatActivity() {
                 Pair("vivo", "Vivos"))
         var staty = 0
 
-            //使用for--in循环
-            tv_main1.setOnClickListener {
-                if(staty ==0){
-                    var dec = ""
-                    for (item in goodsMap) {
-                        dec = "${dec}厂家：${item.key}==产品名称${item.value}\n"
-                    }
-                    Log.d("whq", "for-in遍历出了${goodsMap.size}款手机：\n$dec")
-                    staty = 1
-                }else if (staty == 1) {
-                    //利用迭代器循环
-                    //创建构造器对象
-                    var itera = goodsMuMap.iterator()
-                    var desc = ""
-                    //从构造器中遍历每一个元素
-                    while (itera.hasNext()) {
-                        //取出构造器中的每一个元素
-                        val items = itera.next()
-                        desc = "${desc}迭代器厂家：${items.key}--产品名称${items.value}\n"
-                    }
-                    Log.d("whq", "迭代器遍历出了${goodsMuMap.size}款产品：\n$desc")
-                    staty = 2
-                }else{
-                    var descs = ""
-                    goodsMuMap.forEach { key, value ->
-                        descs = "${descs}厂家:${key}==产品名称${value}\n"
-                    }
-                    Log.d("whq", "用forEach遍历出了数组共有${goodsMuMap.size}款手机，详情为：\n$descs")
-                    staty = 0
+        //使用for--in循环
+        tv_main1.setOnClickListener {
+            if (staty == 0) {
+                var dec = ""
+                for (item in goodsMap) {
+                    dec = "${dec}厂家：${item.key}==产品名称${item.value}\n"
                 }
+                Log.d("whq", "for-in遍历出了${goodsMap.size}款手机：\n$dec")
+                staty = 1
+            } else if (staty == 1) {
+                //利用迭代器循环
+                //创建构造器对象
+                var itera = goodsMuMap.iterator()
+                var desc = ""
+                //从构造器中遍历每一个元素
+                while (itera.hasNext()) {
+                    //取出构造器中的每一个元素
+                    val items = itera.next()
+                    desc = "${desc}迭代器厂家：${items.key}--产品名称${items.value}\n"
+                }
+                Log.d("whq", "迭代器遍历出了${goodsMuMap.size}款产品：\n$desc")
+                staty = 2
+            } else {
+                var descs = ""
+                goodsMuMap.forEach { key, value ->
+                    descs = "${descs}厂家:${key}==产品名称${value}\n"
+                }
+                Log.d("whq", "用forEach遍历出了数组共有${goodsMuMap.size}款手机，详情为：\n$descs")
+                staty = 0
+            }
 
+        }
+
+    }
+
+    fun condition() {
+        //kotlin的一些条件语法
+        var isTrue = true
+        tv_main2.setOnClickListener {
+            //if--else简化
+            /*  if(isTrue){
+                  tv_main2.text = "凉风有信，谜底是讽"
+              }else{
+                  tv_main2.text = "秋月无边，谜底是月"
+              }*/
+            //可简化为,类似java的三元运算符,适合只有一条语句返回的情况,允许分支语句-----返回字符串
+            tv_main2.text = if (isTrue) "凉风有信，谜底是讽" else "秋月无边，谜底是月"
+            isTrue = !isTrue
+        }
+        /**
+         * when/else取代switch/case，并且同样允许分支语句--有返回值。
+         * 1.when取代switch
+         * 2.“常量值->”取代case
+         * 3.语句后的break取消了，kotlin默认语句执行完自动退出
+         * 4.else取代default
+         * instanceof被is取代
+         */
+        var count = 0
+        tv_main1.setOnClickListener {
+           tv_main1.text = when (count) {
+                0,3,6,4,9,7 -> "多个常量可以写一行，用逗号隔开"+count
+                in 12..23 -> "连续的数字范围内可以用 in初始值..结束值"+count
+                !in 7..10 -> "不在某个范围内 用 !初始值..结束值"+count
+                else -> "诗名鹊桥仙"+count
+            }
+            count = (count + 1) % 30
         }
 
     }
