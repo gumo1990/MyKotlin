@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun array() {
         //数组定义,两种方式
         var int_array: IntArray = intArrayOf(1, 2, 3)
