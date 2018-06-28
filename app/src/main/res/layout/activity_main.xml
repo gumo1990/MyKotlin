@@ -31,4 +31,16 @@
         android:id="@+id/tv_main4"
         android:gravity="center"
         android:text="list排序"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/tv_main5"
+        android:gravity="center"
+        android:text="默认参数"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/tv_main6"
+        android:gravity="center"
+        android:text="时间格式"/>
 </LinearLayout>

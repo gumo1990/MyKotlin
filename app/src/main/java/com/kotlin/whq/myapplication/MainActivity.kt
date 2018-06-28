@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * kotlin是兼容java语句的
@@ -18,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         //     Conllection()
         //  List()
         //  map()
-        condition()
+        //condition()
+        //  canshu()
+        Dates()
 
     }
 
@@ -217,6 +221,57 @@ class MainActivity : AppCompatActivity() {
             count = (count + 1) % 30
         }
 
+    }
+
+    fun canshu(){
+        var isOdd = true
+        tv_main5.setOnClickListener {
+            tv_main5.text = if (isOdd) getForBigDefault("古代四大发明", "造纸", "印刷",
+                    "火药", "指南")else getForBigDefault("现代四大发明", "高铁", "网购",
+                    "支付", "共享单车")
+
+                isOdd = !isOdd
+        }
+    }
+    //有默认参数的方法
+    fun getForBigDefault(des:String , first : String = "造纸术", second : String = "印刷术",
+                         three : String = "火药", four : String = "指南针") : String{
+        var answer : String = "$des: $first, $second, $three, $four"
+        return answer
+    }
+
+    //时间格式
+    fun Dates(){
+        var count = 0
+        tv_main6.setOnClickListener {
+            tv_main6.text = "扩展函数时间格式：\n" + when(count++ %4) {
+                0->"当前日期时间为${Date().getNowDateTime()}"
+                1->"只返回日期为${Date().getNowDate()}"
+                2->"只返回时间为${Date().getNowTime()}"
+                else -> "自定义时间格式为${Date().getFormatTime("yyyy年MM月dd日HH时")}"
+            }
+        }
+    }
+    //扩展函数获取时间格式
+    fun Date.getNowDateTime():String{
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return sdf.format(date)
+    }
+    //只返回日期
+    fun Date.getNowDate() : String{
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        return sdf.format(this)
+    }
+    //只返回时间，精确到毫秒
+    fun Date.getNowTime() : String{
+        val sdf = SimpleDateFormat("hh:mm:ss.SSS")
+        return sdf.format(this)
+    }
+    //返回开发者指定格式的日期
+    fun Date.getFormatTime(date : String= ""): String{
+        var ft: String = date
+        val sdf = if(!ft.isEmpty()) SimpleDateFormat(date) else SimpleDateFormat("yyyyMMddHHmmssSSS")
+        return sdf.format(this)
     }
 
 }
